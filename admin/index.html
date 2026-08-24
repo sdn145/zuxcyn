@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Zuxcyn & Pyni</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,system-ui,sans-serif;
+  background:#08080d;
+  color:#fff;
+  padding:20px;
+}
+
+.container{
+  width:min(650px,100%);
+  margin:auto;
+}
+
+.card{
+  background:#15151d;
+  border:1px solid #292936;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 15px 50px rgba(0,0,0,.35);
+}
+
+h1{margin:0 0 8px}
+
+.subtitle{
+  color:#999;
+  margin-bottom:25px;
+}
+
+label{
+  display:block;
+  margin:16px 0 7px;
+  font-weight:bold;
+}
+
+input,textarea{
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  border:1px solid #30303c;
+  background:#09090e;
+  color:#fff;
+  outline:none;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+button{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:0;
+  border-radius:11px;
+  background:#8b5cf6;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.secondary{
+  background:#292933;
+}
+
+.status{
+  margin-top:18px;
+  padding:13px;
+  border-radius:10px;
+  display:none;
+  line-height:1.5;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.status.info{
+  display:block;
+  background:#1d2330;
+  color:#bcd4ff;
+}
+
+.status.success{
+  display:block;
+  background:#13271a;
+  color:#8cffaa;
+}
+
+.status.error{
+  display:block;
+  background:#2b1518;
+  color:#ff9da8;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.preview{
+  display:none;
+  width:100%;
+  max-height:250px;
+  object-fit:cover;
+  margin-top:12px;
+  border-radius:12px;
+}
+
+.small{
+  color:#888;
+  font-size:12px;
+  line-height:1.5;
+}
+
+/* ---- site switch pill ---- */
+
+.siteSwitch{
+  display:flex;
+  gap:6px;
+  background:#09090e;
+  border:1px solid #292936;
+  border-radius:12px;
+  padding:5px;
+  margin-bottom:20px;
+}
+
+.siteSwitch button{
+  flex:1;
+  margin:0;
+  padding:10px;
+  border-radius:8px;
+  background:transparent;
+  color:#888;
+  font-weight:bold;
+}
+
+.siteSwitch button.active{
+  background:#8b5cf6;
+  color:#fff;
+}
+
+.siteSwitch button.active.pyni{
+  background:#06d6a0;
+  color:#04120f;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="card" id="loginCard">
+
+    <h1>🔐 Admin</h1>
+
+    <div class="subtitle">
+      Panel upload Pack — pilih situs, lalu masukkan Owner Key situs itu.
+    </div>
+
+    <div class="siteSwitch" id="loginSiteSwitch">
+      <button type="button" class="active" data-site="zuxcyn">Zuxcyn</button>
+      <button type="button" data-site="pyni">Pyni</button>
+    </div>
+
+    <label>Owner Key</label>
+
+    <input
+      id="ownerKey"
+      type="password"
+      placeholder="Masukkan Owner Key"
+      autocomplete="off"
+    >
+
+    <div class="small" style="margin-top:6px">
+      Owner Key tidak dicek di sini — dicek di server (Worker) supaya aman.
+    </div>
+
+    <button onclick="openPanel()">
+      BUKA PANEL
+    </button>
+
+    <div id="loginStatus" class="status"></div>
+
+  </div>
+
+
+  <div class="card hidden" id="adminCard">
+
+    <div class="siteSwitch" id="adminSiteSwitch">
+      <button type="button" data-site="zuxcyn">Zuxcyn</button>
+      <button type="button" data-site="pyni">Pyni</button>
+    </div>
+
+    <h1 id="adminTitle">🚀 Upload Pack</h1>
+
+    <div class="subtitle" id="adminSubtitle">
+      Upload data pack ke GitHub melalui Cloudflare Worker.
+    </div>
+
+    <label>Nama Pack</label>
+
+    <input
+      id="packName"
+      type="text"
+      placeholder="Contoh: Shake Pack"
+    >
+
+    <label>Deskripsi</label>
+
+    <textarea
+      id="packDesc"
+      placeholder="Deskripsi pack..."
+    ></textarea>
+
+    <label>Link Preset</label>
+
+    <input
+      id="packUrl"
+      type="url"
+      placeholder="https://alightcreative.com/am/share/..."
+    >
+
+    <label>Nama JPG</label>
+
+    <input
+      id="packImage"
+      type="text"
+      placeholder="Contoh: shake.jpg"
+    >
+
+    <div class="small" id="assetFolderHint">
+      File foto harus sudah ada di:
+      <b>assets/preset/</b>
+    </div>
+
+    <img id="preview" class="preview">
+
+    <button
+      id="publishButton"
+      onclick="publishPack()"
+    >
+      🚀 PUBLISH PACK
+    </button>
+
+    <button
+      class="secondary"
+      onclick="testWorker()"
+    >
+      🔎 CEK KONEKSI WORKER
+    </button>
+
+    <button
+      class="secondary"
+      onclick="logout()"
+    >
+      LOGOUT
+    </button>
+
+    <div id="status" class="status"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   URL WORKER
+   Kalau punya Worker terpisah untuk Pyni, isi
+   WORKER_URL_PYNI dengan URL itu. Kalau satu Worker
+   dipakai untuk dua situs (dibedakan lewat field "site"
+   yang dikirim di body), biarkan sama seperti WORKER_URL.
+   ===================================================== */
+
+const WORKER_URL =
+"https://zuxcyn-pack-api.mandasukaaku.workers.dev";
+
+const WORKER_URL_PYNI =
+WORKER_URL;
+
+/* mapping nama folder aset gambar per situs, cuma untuk teks bantuan */
+const ASSET_FOLDER = {
+  zuxcyn: "assets/preset/",
+  pyni: "assets/preset-pyni/"
+};
+
+
+/* =====================================================
+   ELEMENT
+   ===================================================== */
+
+const loginCard =
+document.getElementById("loginCard");
+
+const adminCard =
+document.getElementById("adminCard");
+
+const ownerKey =
+document.getElementById("ownerKey");
+
+const statusBox =
+document.getElementById("status");
+
+const loginStatus =
+document.getElementById("loginStatus");
+
+const publishButton =
+document.getElementById("publishButton");
+
+const preview =
+document.getElementById("preview");
+
+const adminTitle =
+document.getElementById("adminTitle");
+
+const adminSubtitle =
+document.getElementById("adminSubtitle");
+
+const assetFolderHint =
+document.getElementById("assetFolderHint");
+
+
+/* =====================================================
+   SITE STATE
+   ===================================================== */
+
+let selectedSite =
+sessionStorage.getItem("zuxcyn_admin_site") || "zuxcyn";
+
+
+function currentWorkerUrl(){
+
+  return selectedSite === "pyni" ? WORKER_URL_PYNI : WORKER_URL;
+
+}
+
+
+function paintSiteSwitch(container, site){
+
+  container.querySelectorAll("button").forEach(function(btn){
+
+    const isActive = btn.dataset.site === site;
+
+    btn.classList.toggle("active", isActive);
+
+    btn.classList.toggle("pyni", btn.dataset.site === "pyni");
+
+  });
+
+}
+
+
+function applySiteUi(){
+
+  paintSiteSwitch(document.getElementById("loginSiteSwitch"), selectedSite);
+  paintSiteSwitch(document.getElementById("adminSiteSwitch"), selectedSite);
+
+  const isPyni = selectedSite === "pyni";
+
+  adminTitle.textContent = isPyni ? "🚀 Upload Pack — Pyni" : "🚀 Upload Pack — Zuxcyn";
+
+  adminSubtitle.textContent =
+    "Upload data pack " + (isPyni ? "Pyni" : "Zuxcyn") + " ke GitHub melalui Cloudflare Worker.";
+
+  assetFolderHint.innerHTML =
+    "File foto harus sudah ada di: <b>" + ASSET_FOLDER[selectedSite] + "</b>";
+
+  publishButton.style.background = isPyni ? "#06d6a0" : "#8b5cf6";
+  publishButton.style.color = isPyni ? "#04120f" : "#fff";
+
+}
+
+
+function selectSite(site){
+
+  selectedSite = site;
+
+  sessionStorage.setItem("zuxcyn_admin_site", site);
+
+  applySiteUi();
+
+}
+
+
+document
+  .getElementById("loginSiteSwitch")
+  .querySelectorAll("button")
+  .forEach(function(btn){
+    btn.addEventListener("click", function(){ selectSite(btn.dataset.site); });
+  });
+
+document
+  .getElementById("adminSiteSwitch")
+  .querySelectorAll("button")
+  .forEach(function(btn){
+    btn.addEventListener("click", function(){ selectSite(btn.dataset.site); });
+  });
+
+
+/* =====================================================
+   LOGIN
+   ===================================================== */
+
+function openPanel(){
+
+  const key =
+    ownerKey.value.trim();
+
+  if(!key){
+
+    loginStatus.className =
+      "status error";
+
+    loginStatus.textContent =
+      "Masukkan Owner Key terlebih dahulu.";
+
+    return;
+  }
+
+  sessionStorage.setItem(
+    "zuxcyn_owner_key",
+    key
+  );
+
+  sessionStorage.setItem(
+    "zuxcyn_admin_site",
+    selectedSite
+  );
+
+  loginCard.classList.add("hidden");
+  adminCard.classList.remove("hidden");
+
+  applySiteUi();
+
+  showStatus(
+    "info",
+    "Panel terbuka. Tekan CEK KONEKSI WORKER terlebih dahulu."
+  );
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+function logout(){
+
+  sessionStorage.removeItem(
+    "zuxcyn_owner_key"
+  );
+
+  location.reload();
+}
+
+
+/* =====================================================
+   STATUS
+   ===================================================== */
+
+function showStatus(type,message){
+
+  statusBox.className =
+    "status " + type;
+
+  statusBox.textContent =
+    message;
+}
+
+
+/* =====================================================
+   CEK WORKER
+   ===================================================== */
+
+async function testWorker(){
+
+  showStatus(
+    "info",
+    "⏳ Menghubungi Worker (" + selectedSite + ")..."
+  );
+
+  try{
+
+    const response =
+      await fetch(
+        currentWorkerUrl() + "?site=" + encodeURIComponent(selectedSite),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+    const text =
+      await response.text();
+
+    let data;
+
+    try{
+      data = JSON.parse(text);
+    }catch{
+      throw new Error(
+        "Worker tidak mengembalikan JSON.\n\n" +
+        text.substring(0,300)
+      );
+    }
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "HTTP " + response.status
+      );
+    }
+
+    if(data.ok !== true){
+
+      throw new Error(
+        data.error ||
+        "Worker mengembalikan status gagal."
+      );
+    }
+
+    showStatus(
+      "success",
+      "✅ WORKER TERHUBUNG! (" + selectedSite + ")\n\n" +
+      "Jumlah pack: " +
+      (
+        Array.isArray(data.packs)
+        ? data.packs.length
+        : 0
+      )
+    );
+
+  }catch(error){
+
+    showStatus(
+      "error",
+      "❌ GAGAL MENGHUBUNGI WORKER\n\n" +
+      error.message
+    );
+  }
+}
+
+
+/* =====================================================
+   PUBLISH
+   ===================================================== */
+
+async function publishPack(){
+
+  const adminKey =
+    sessionStorage.getItem(
+      "zuxcyn_owner_key"
+    );
+
+  if(!adminKey){
+
+    showStatus(
+      "error",
+      "Session Owner Key tidak ditemukan. Login kembali."
+    );
+
+    return;
+  }
+
+
+  const name =
+    document.getElementById(
+      "packName"
+    ).value.trim();
+
+  const desc =
+    document.getElementById(
+      "packDesc"
+    ).value.trim();
+
+  const url =
+    document.getElementById(
+      "packUrl"
+    ).value.trim();
+
+  const image =
+    document.getElementById(
+      "packImage"
+    ).value.trim();
+
+
+  if(!name){
+
+    showStatus(
+      "error",
+      "Nama Pack wajib diisi."
+    );
+
+    return;
+  }
+
+  if(!url){
+
+    showStatus(
+      "error",
+      "Link Preset wajib diisi."
+    );
+
+    return;
+  }
+
+  if(!image){
+
+    showStatus(
+      "error",
+      "Nama JPG wajib diisi."
+    );
+
+    return;
+  }
+
+
+  if(
+    image.includes("/") ||
+    image.includes("\\") ||
+    image.includes("..")
+  ){
+
+    showStatus(
+      "error",
+      "Nama JPG cukup nama file saja. Contoh: shake.jpg"
+    );
+
+    return;
+  }
+
+
+  publishButton.disabled =
+    true;
+
+  publishButton.textContent =
+    "⏳ PUBLISHING...";
+
+
+  showStatus(
+    "info",
+    "⏳ Mengirim Pack (" + selectedSite + ") ke Worker..."
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        currentWorkerUrl(),
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            adminKey:
+              adminKey,
+
+            site:
+              selectedSite,
+
+            name:
+              name,
+
+            desc:
+              desc,
+
+            url:
+              url,
+
+            image:
+              image
+
+          })
+
+        }
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data;
+
+    try{
+
+      data =
+        JSON.parse(text);
+
+    }catch{
+
+      throw new Error(
+        "Worker mengembalikan response bukan JSON:\n" +
+        text.substring(0,300)
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "HTTP " +
+        response.status
+      );
+
+    }
+
+
+    if(data.ok !== true){
+
+      throw new Error(
+        data.error ||
+        "Publish gagal."
+      );
+
+    }
+
+
+    showStatus(
+      "success",
+      "✅ PACK (" + selectedSite + ") BERHASIL DIPUBLISH!\n\n" +
+      "Nama: " +
+      name +
+      "\n" +
+      "Foto: " +
+      image +
+      "\n\n" +
+      "Data pack sudah dikirim ke GitHub."
+    );
+
+
+    document.getElementById(
+      "packName"
+    ).value = "";
+
+    document.getElementById(
+      "packDesc"
+    ).value = "";
+
+    document.getElementById(
+      "packUrl"
+    ).value = "";
+
+    document.getElementById(
+      "packImage"
+    ).value = "";
+
+    preview.style.display =
+      "none";
+
+
+  }catch(error){
+
+    let message =
+      error.message ||
+      "Unknown error";
+
+
+    if(
+      message === "Failed to fetch"
+    ){
+
+      message =
+        "Browser tidak bisa menghubungi Worker.\n\n" +
+        "Pastikan URL Worker aktif dan website menggunakan HTTPS.";
+    }
+
+
+    showStatus(
+      "error",
+      "❌ GAGAL PUBLISH\n\n" +
+      message
+    );
+
+
+  }finally{
+
+    publishButton.disabled =
+      false;
+
+    publishButton.textContent =
+      "🚀 PUBLISH PACK";
+
+  }
+
+}
+
+
+/* =====================================================
+   PREVIEW FOTO
+   ===================================================== */
+
+document
+.getElementById("packImage")
+.addEventListener(
+  "input",
+  function(){
+
+    const filename =
+      this.value.trim();
+
+    if(!filename){
+
+      preview.style.display =
+        "none";
+
+      return;
+    }
+
+
+    preview.src =
+      "../" + ASSET_FOLDER[selectedSite] +
+      encodeURIComponent(filename);
+
+
+    preview.style.display =
+      "block";
+
+
+    preview.onerror =
+      function(){
+
+        preview.style.display =
+          "none";
+
+      };
+
+  }
+);
+
+
+/* =====================================================
+   AUTO LOGIN
+   ===================================================== */
+
+applySiteUi();
+
+if(
+  sessionStorage.getItem(
+    "zuxcyn_owner_key"
+  )
+){
+
+  loginCard.classList.add("hidden");
+  adminCard.classList.remove("hidden");
+
+}
+
+</script>
+
+</body>
+</html>
