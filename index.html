@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Pack by Zuxcyn</title>
+
+<style>
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth
+}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial;
+  color:#fff;
+  background:#090909 url("assets/background.jpg") center/cover fixed no-repeat
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(
+    135deg,
+    rgba(0,0,0,.82),
+    rgba(10,10,20,.55)
+  );
+  z-index:-1
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter:blur(14px);
+  background:rgba(10,10,10,.7);
+  border-bottom:1px solid #ffffff18;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 5%
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  color:#fff;
+  text-decoration:none
+}
+
+.logo img{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  object-fit:cover
+}
+
+.nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+
+.nav a{
+  color:#ddd;
+  text-decoration:none;
+  padding:9px 12px;
+  border-radius:10px
+}
+
+.nav a:hover{
+  background:#ffffff12
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:65px 20px
+}
+
+.hero{
+  text-align:center;
+  padding:45px 10px 55px
+}
+
+.hero h1{
+  font-size:clamp(42px,8vw,82px);
+  margin:0;
+  background:linear-gradient(90deg,#fff,#9f9f9f);
+  -webkit-background-clip:text;
+  color:transparent
+}
+
+.hero p{
+  color:#bbb;
+  max-width:680px;
+  margin:18px auto;
+  line-height:1.7
+}
+
+.btn{
+  display:inline-flex;
+  border:0;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg,#6d5cff,#b62cff);
+  padding:13px 19px;
+  border-radius:14px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 10px 30px #6d5cff25
+}
+
+.btn:hover{
+  filter:brightness(1.12)
+}
+
+.btn:disabled{
+  background:#303038;
+  color:#777;
+  cursor:not-allowed;
+  box-shadow:none;
+  filter:none
+}
+
+section{
+  margin:38px 0
+}
+
+.section-title{
+  font-size:28px;
+  margin-bottom:18px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+  gap:18px
+}
+
+.card{
+  background:rgba(18,18,22,.72);
+  border:1px solid #ffffff12;
+  border-radius:22px;
+  padding:16px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 50px #0005
+}
+
+.card img{
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+  border-radius:15px;
+  background:#151515
+}
+
+.card h3{
+  margin:14px 0 7px
+}
+
+.card p{
+  color:#aaa;
+  line-height:1.6;
+  font-size:14px
+}
+
+.card .btn{
+  width:100%;
+  justify-content:center;
+  margin-top:8px
+}
+
+.social{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap
+}
+
+.social a{
+  color:#fff;
+  text-decoration:none;
+  background:#ffffff10;
+  border:1px solid #ffffff14;
+  padding:12px 15px;
+  border-radius:13px
+}
+
+.support{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px
+}
+
+.support .person{
+  display:flex;
+  gap:14px;
+  align-items:center
+}
+
+.person img{
+  width:82px;
+  height:82px;
+  border-radius:20px;
+  object-fit:cover
+}
+
+.muted{
+  color:#aaa
+}
+
+footer{
+  text-align:center;
+  color:#777;
+  padding:45px 20px;
+  border-top:1px solid #ffffff10
+}
+
+.loader{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99
+}
+
+.loader.show{
+  display:flex
+}
+
+.loaderbox{
+  background:#15151b;
+  padding:28px;
+  border-radius:20px;
+  text-align:center;
+  border:1px solid #ffffff15
+}
+
+.spin{
+  width:42px;
+  height:42px;
+  border:4px solid #ffffff22;
+  border-top-color:#a65cff;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin:auto auto 14px
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg)
+  }
+}
+
+.locked{
+  background:#25252b !important;
+  color:#888 !important;
+  cursor:not-allowed !important;
+  box-shadow:none !important
+}
+
+.unlock-info{
+  color:#ff9da8;
+  font-size:12px;
+  margin-top:8px;
+  text-align:center;
+  line-height:1.4
+}
+
+.dynamic-status{
+  grid-column:1/-1;
+  text-align:center;
+  padding:25px;
+  color:#aaa
+}
+
+.dynamic-error{
+  grid-column:1/-1;
+  background:#2b1518;
+  border:1px solid #ff5c6c33;
+  border-radius:15px;
+  padding:18px;
+  color:#ffadb5;
+  line-height:1.6
+}
+
+@media(max-width:600px){
+
+  .nav a{
+    display:none
+  }
+
+  header{
+    padding:10px 4%
+  }
+
+  main{
+    padding-top:35px
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="#">
+  <img src="assets/zuxcyn.jpg" alt="Zuxcyn">
+  Zuxcyn
+</a>
+
+<nav class="nav">
+  <a href="#packs">Packs</a>
+  <a href="#support">Support</a>
+  <a href="#social">Social</a>
+</nav>
+
+</header>
+
+<main>
+
+<section class="hero">
+
+<h1>PACK BY ZUXCYN</h1>
+
+<p>
+Kumpulan preset, Pack
+By: Zuxcyn.
+</p>
+
+<a class="btn" href="#packs">
+Lihat Pack
+</a>
+
+</section>
+
+
+<section id="packs">
+
+<h2 class="section-title">
+🔥 Pack Edit
+</h2>
+
+<div class="grid">
+
+<!-- PACK DARI ADMIN / GITHUB -->
+
+<div
+id="dynamicPacks"
+class="grid"
+style="grid-column:1/-1"
+>
+
+<div class="dynamic-status">
+⏳ Memuat pack terbaru...
+</div>
+
+</div>
+
+
+<!-- FULL EDIT -->
+
+<article class="card">
+
+<img
+src="assets/fulledit.jpg"
+alt="Preset Full Edit"
+>
+
+<h3>
+Preset Full Edit
+</h3>
+
+<p>
+Preset full edit
+</p>
+
+<button
+id="fullEditButton"
+class="btn locked"
+disabled
+>
+🔒 LOCKED
+</button>
+
+<p
+id="unlockInfo"
+class="unlock-info"
+>
+Unlock pada 30 Agustus 2026
+</p>
+
+</article>
+
+
+<!-- TRANSITION -->
+
+<article class="card">
+
+<img
+src="assets/Transition.jpg"
+alt="Preset Transition"
+>
+
+<h3>
+Preset Transition
+</h3>
+
+<p>
+preset transition
+</p>
+
+<button
+class="btn download"
+data-url="https://alightcreative.com/am/share/u/ORedvT0kuPbIaRkh2ZQQef2oAju2/p/oSdMFDryih-5038213ac6c8f450"
+>
+Download Preset
+</button>
+
+</article>
+
+
+<!-- CC -->
+
+<article class="card">
+
+<img
+src="assets/CC.jpg"
+alt="CC"
+>
+
+<h3>
+CC
+</h3>
+
+<p>
+Preset CC warna biru🗿
+</p>
+
+<button
+class="btn download"
+data-url="https://alightcreative.com/am/share/u/bvTqSMae0dMR9DI3LI4bP6WeNfo2/p/UP1zGgZKgM-bfcfd6d1344d48d5"
+>
+Download Preset
+</button>
+
+</article>
+
+</div>
+
+</section>
+
+
+<section>
+
+<h2 class="section-title">
+✨ Tentang Pack
+</h2>
+
+<div class="card">
+
+<p>
+Pack by Zuxcyn dibuat sebagai tempat berbagi
+koleksi edit, preset, transition, dan CC.
+Gunakan sesuai kebutuhan editing dan cek kembali
+halaman ini untuk pack baru.
+</p>
+
+</div>
+
+</section>
+
+
+<section id="social">
+
+<h2 class="section-title">
+🌐 Media Sosial
+</h2>
+
+<div class="social">
+
+<a
+href="https://www.tiktok.com/@zuxcynn"
+target="_blank"
+rel="noopener noreferrer"
+>
+TikTok
+</a>
+
+<a
+href="https://www.youtube.com/@sdn_5mb"
+target="_blank"
+rel="noopener noreferrer"
+>
+YouTube
+</a>
+
+<a
+href="https://chat.whatsapp.com/EwCHs2UQ3uc6nk2DOzyVlS"
+target="_blank"
+rel="noopener noreferrer"
+>
+Grup WhatsApp
+</a>
+
+</div>
+
+</section>
+
+
+<section id="support">
+
+<h2 class="section-title">
+💜 Support Piro & Aqilah
+</h2>
+
+<div class="support">
+
+<div class="card person">
+
+<img
+src="assets/Ppgf.jpg"
+alt=""
+>
+
+<div>
+
+<h3>
+Aqilah
+</h3>
+
+<p class="muted">
+@aqilahnadhirah_
+</p>
+
+<a
+class="btn"
+href="https://www.tiktok.com/@aqilahnadhirah_"
+target="_blank"
+rel="noopener noreferrer"
+>
+TikTok
+</a>
+
+</div>
+
+</div>
+
+
+<div class="card person">
+
+<img
+src="assets/Ppsahabat.jpg"
+alt=""
+>
+
+<div>
+
+<h3>
+Anomali
+</h3>
+
+<p class="muted">
+@pirowangyy
+</p>
+
+<a
+class="btn"
+href="https://www.tiktok.com/@pirowangyy"
+target="_blank"
+rel="noopener noreferrer"
+>
+TikTok
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+Made with ❤️ by Zuxcyn
+</footer>
+
+
+<div
+class="loader"
+id="loader"
+aria-hidden="true"
+>
+
+<div class="loaderbox">
+
+<div class="spin"></div>
+
+<b>
+Membuka preset...
+</b>
+
+<p class="muted">
+Tunggu sebentar
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   WORKER API
+   ===================================================== */
+
+const WORKER_URL =
+"https://zuxcyn-pack-api.mandasukaaku.workers.dev";
+
+
+/* =====================================================
+   FULL EDIT
+   ===================================================== */
+
+const FULL_EDIT_URL =
+"https://alightcreative.com/am/share/u/HOOqSCWvegQQAJaKpPpOutWquMu1/p/XlCvUW5ze8-a614ba8f95b94bfe";
+
+
+/* =====================================================
+   LOADER
+   ===================================================== */
+
+const loader =
+document.getElementById("loader");
+
+
+function hideLoader(){
+
+  loader.classList.remove("show");
+
+  loader.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+}
+
+
+function openPreset(url){
+
+  if(!url){
+    return;
+  }
+
+  loader.classList.add("show");
+
+  loader.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  setTimeout(function(){
+
+    window.location.href = url;
+
+  },300);
+
+}
+
+
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    hideLoader();
+
+  }
+);
+
+
+document.addEventListener(
+  "visibilitychange",
+  function(){
+
+    if(
+      document.visibilityState === "visible"
+    ){
+
+      hideLoader();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   TRANSITION + CC
+   ===================================================== */
+
+document
+.querySelectorAll(".download")
+.forEach(function(button){
+
+  button.onclick = function(){
+
+    openPreset(
+      button.dataset.url
+    );
+
+  };
+
+});
+
+
+/* =====================================================
+   FULL EDIT LOCK
+   ===================================================== */
+
+const unlockDate =
+new Date("2026-08-30T00:00:00+07:00");
+
+const fullEditButton =
+document.getElementById("fullEditButton");
+
+const unlockInfo =
+document.getElementById("unlockInfo");
+
+
+function checkFullEdit(){
+
+  const now =
+  new Date();
+
+  if(now >= unlockDate){
+
+    fullEditButton.disabled = false;
+
+    fullEditButton.classList.remove(
+      "locked"
+    );
+
+    fullEditButton.textContent =
+      "Download Preset";
+
+    unlockInfo.textContent =
+      "Preset sudah tersedia.";
+
+    unlockInfo.style.color =
+      "#8cffaa";
+
+    fullEditButton.onclick =
+      function(){
+
+        openPreset(
+          FULL_EDIT_URL
+        );
+
+      };
+
+  }else{
+
+    fullEditButton.disabled = true;
+
+    fullEditButton.classList.add(
+      "locked"
+    );
+
+    fullEditButton.textContent =
+      "🔒 LOCKED";
+
+    unlockInfo.textContent =
+      "Unlock pada 30 Agustus 2026";
+
+    unlockInfo.style.color =
+      "#ff9da8";
+
+    fullEditButton.onclick = null;
+
+  }
+
+}
+
+
+checkFullEdit();
+
+setInterval(
+  checkFullEdit,
+  1000
+);
+
+
+/* =====================================================
+   LOAD PACK DARI WORKER (DILENGKAPI KONTROL LOCK & PESAN)
+   ===================================================== */
+
+async function loadDynamicPacks(){
+
+  const container =
+    document.getElementById(
+      "dynamicPacks"
+    );
+
+  try{
+
+    const response =
+      await fetch(
+        WORKER_URL +
+        "?t=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data;
+
+    try{
+
+      data =
+        JSON.parse(text);
+
+    }catch{
+
+      throw new Error(
+        "Worker tidak mengembalikan JSON."
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "HTTP " +
+        response.status
+      );
+
+    }
+
+
+    if(
+      data.ok !== true
+    ){
+
+      throw new Error(
+        data.error ||
+        "Gagal mengambil packs."
+      );
+
+    }
+
+
+    const packs =
+      Array.isArray(data.packs)
+      ? data.packs
+      : [];
+
+
+    if(packs.length === 0){
+
+      container.innerHTML = "";
+
+      return;
+
+    }
+
+
+    const newestFirst =
+      [...packs].reverse();
+
+
+    container.innerHTML =
+      "";
+
+
+    newestFirst.forEach(
+      function(pack){
+
+        const card =
+          document.createElement(
+            "article"
+          );
+
+        card.className =
+          "card";
+
+
+        const img =
+          document.createElement(
+            "img"
+          );
+
+        let imageSrc =
+          String(
+            pack.image || ""
+          );
+
+        if(
+          imageSrc &&
+          !imageSrc.startsWith("http") &&
+          !imageSrc.startsWith("assets/")
+        ){
+          imageSrc = "assets/preset/" + imageSrc;
+        }
+
+        img.src =
+          imageSrc;
+
+
+        img.alt =
+          String(
+            pack.name ||
+            "Pack"
+          );
+
+
+        img.onerror =
+          function(){
+
+            this.style.objectFit =
+              "contain";
+
+            this.style.padding =
+              "30px";
+
+            this.alt =
+              "Gambar pack tidak ditemukan";
+
+          };
+
+
+        const title =
+          document.createElement(
+            "h3"
+          );
+
+        title.textContent =
+          String(
+            pack.name ||
+            "Pack tanpa nama"
+          );
+
+
+        const desc =
+          document.createElement(
+            "p"
+          );
+
+        desc.textContent =
+          String(
+            pack.desc ||
+            "Pack by Zuxcyn."
+          );
+
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.className =
+          "btn";
+
+
+        const isLocked =
+          Boolean(
+            pack.isLocked
+          );
+
+        const lockMsg =
+          String(
+            pack.lockMessage ||
+            "maaf sementara aku lock dulu preset ini"
+          );
+
+
+        if(isLocked){
+
+          button.disabled =
+            true;
+
+          button.classList.add(
+            "locked"
+          );
+
+          button.textContent =
+            "🔒 LOCKED";
+
+
+          const info =
+            document.createElement(
+              "p"
+            );
+
+          info.className =
+            "unlock-info";
+
+          info.textContent =
+            lockMsg;
+
+
+          card.appendChild(img);
+
+          card.appendChild(title);
+
+          card.appendChild(desc);
+
+          card.appendChild(button);
+
+          card.appendChild(info);
+
+        }else{
+
+          button.textContent =
+            "Download Preset";
+
+          button.onclick =
+            function(){
+
+              openPreset(
+                String(
+                  pack.url || ""
+                )
+              );
+
+            };
+
+          if(!pack.url){
+
+            button.disabled =
+              true;
+
+            button.textContent =
+              "Link Tidak Tersedia";
+
+          }
+
+          card.appendChild(img);
+
+          card.appendChild(title);
+
+          card.appendChild(desc);
+
+          card.appendChild(button);
+
+        }
+
+
+        container.appendChild(
+          card
+        );
+
+      }
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Gagal memuat pack:",
+      error
+    );
+
+
+    container.innerHTML = `
+      <div class="dynamic-error">
+        ❌ Pack terbaru gagal dimuat.<br><br>
+        Worker: ${WORKER_URL}<br>
+        Error: ${escapeHtml(error.message)}
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+   ===================================================== */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+loadDynamicPacks();
+
+
+setInterval(
+  loadDynamicPacks,
+  15000
+);
+
+</script>
+
+</body>
+</html>
