@@ -1,12 +1,12 @@
 [
   {
-    "id": "6b30b675-c52b-4c1b-b031-5b2f0c249a38",
+    "id": "d98851a0-320a-4c93-9ce2-7039496a43af",
     "name": "SQUEEZE TRANSITION",
     "desc": "Shake mirip di after effect",
     "url": "https://alightcreative.com/am/share/u/ryd1iJGhugg5KYTrkcuddEMkRW32/p/0VQVLygU4P-da1ce7f51a2a399d",
     "image": "assets/preset/Shake.jpg",
-    "isLocked": true,
-    "lockMessage": "TEST LOCK",
-    "createdAt": "2026-08-29T10:22:00.442Z"
+    "isLocked": false,
+    "lockMessage": "maaf sementara aku lock dulu preset ini",
+    "createdAt": "2026-08-29T10:22:29.083Z"
   }
 ]
