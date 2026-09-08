@@ -18,5 +18,15 @@
     "isLocked": false,
     "lockMessage": "maaf sementara aku lock dulu preset ini",
     "createdAt": "2026-08-29T21:24:35.922Z"
+  },
+  {
+    "id": "a43a4068-8da1-471a-9130-e5e3c880a5ac",
+    "name": "Slide Transition",
+    "desc": "Preset editing",
+    "url": "https://alightcreative.com/am/share/u/llZDW0UgwRgGjTRKKGeCRQJgNWv2/p/T45Xd6JlnM-6ae324cb70e8a993",
+    "image": "assets/preset/P.jpg",
+    "isLocked": false,
+    "lockMessage": "",
+    "createdAt": "2026-09-08T21:57:23.125Z"
   }
 ]
