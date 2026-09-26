@@ -1,0 +1,1245 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Pack by Zuxcyn</title>
+
+<style>
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth
+}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial;
+  color:#fff;
+  background:#090909 url("assets/background.jpg") center/cover fixed no-repeat
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(
+    135deg,
+    rgba(0,0,0,.82),
+    rgba(10,10,20,.55)
+  );
+  z-index:-1
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter:blur(14px);
+  background:rgba(10,10,10,.7);
+  border-bottom:1px solid #ffffff18;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 5%
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  color:#fff;
+  text-decoration:none
+}
+
+.logo img{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  object-fit:cover
+}
+
+.nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+
+.nav a{
+  color:#ddd;
+  text-decoration:none;
+  padding:9px 12px;
+  border-radius:10px
+}
+
+.nav a:hover{
+  background:#ffffff12
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:65px 20px
+}
+
+.hero{
+  text-align:center;
+  padding:45px 10px 55px
+}
+
+.hero h1{
+  font-size:clamp(42px,8vw,82px);
+  margin:0;
+  background:linear-gradient(90deg,#fff,#9f9f9f);
+  -webkit-background-clip:text;
+  color:transparent
+}
+
+.hero p{
+  color:#bbb;
+  max-width:680px;
+  margin:18px auto;
+  line-height:1.7
+}
+
+.btn{
+  display:inline-flex;
+  border:0;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg,#6d5cff,#b62cff);
+  padding:13px 19px;
+  border-radius:14px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 10px 30px #6d5cff25
+}
+
+.btn:hover{
+  filter:brightness(1.12)
+}
+
+.btn:disabled{
+  background:#303038;
+  color:#777;
+  cursor:not-allowed;
+  box-shadow:none;
+  filter:none
+}
+
+section{
+  margin:38px 0
+}
+
+.section-title{
+  font-size:28px;
+  margin-bottom:18px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+  gap:18px
+}
+
+.card{
+  background:rgba(18,18,22,.72);
+  border:1px solid #ffffff12;
+  border-radius:22px;
+  padding:16px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 50px #0005
+}
+
+.card img{
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+  border-radius:15px;
+  background:#151515
+}
+
+.card h3{
+  margin:14px 0 7px
+}
+
+.card p{
+  color:#aaa;
+  line-height:1.6;
+  font-size:14px
+}
+
+.card .btn{
+  width:100%;
+  justify-content:center;
+  margin-top:8px
+}
+
+.social{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap
+}
+
+.social a{
+  color:#fff;
+  text-decoration:none;
+  background:#ffffff10;
+  border:1px solid #ffffff14;
+  padding:12px 15px;
+  border-radius:13px
+}
+
+.support{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px
+}
+
+.support .person{
+  display:flex;
+  gap:14px;
+  align-items:center
+}
+
+.person img{
+  width:82px;
+  height:82px;
+  border-radius:20px;
+  object-fit:cover
+}
+
+.muted{
+  color:#aaa
+}
+
+footer{
+  text-align:center;
+  color:#777;
+  padding:45px 20px;
+  border-top:1px solid #ffffff10
+}
+
+.loader{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99
+}
+
+.loader.show{
+  display:flex
+}
+
+.loaderbox{
+  background:#15151b;
+  padding:28px;
+  border-radius:20px;
+  text-align:center;
+  border:1px solid #ffffff15
+}
+
+.spin{
+  width:42px;
+  height:42px;
+  border:4px solid #ffffff22;
+  border-top-color:#a65cff;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin:auto auto 14px
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg)
+  }
+}
+
+.locked{
+  background:#25252b !important;
+  color:#888 !important;
+  cursor:not-allowed !important;
+  box-shadow:none !important
+}
+
+.unlock-info{
+  color:#ff9da8;
+  font-size:12px;
+  margin-top:8px;
+  text-align:center;
+  line-height:1.4
+}
+
+.dynamic-status{
+  grid-column:1/-1;
+  text-align:center;
+  padding:25px;
+  color:#aaa
+}
+
+.dynamic-error{
+  grid-column:1/-1;
+  background:#2b1518;
+  border:1px solid #ff5c6c33;
+  border-radius:15px;
+  padding:18px;
+  color:#ffadb5;
+  line-height:1.6
+}
+
+@media(max-width:600px){
+
+  .nav a{
+    display:none
+  }
+
+  header{
+    padding:10px 4%
+  }
+
+  main{
+    padding-top:35px
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="#">
+  <img src="assets/zuxcyn.jpg" alt="Zuxcyn">
+  Zuxcyn
+</a>
+
+<nav class="nav">
+  <a href="#packs">Packs</a>
+  <a href="#support">Support</a>
+  <a href="#social">Social</a>
+</nav>
+
+</header>
+
+<main>
+
+<section class="hero">
+
+<h1>PACK BY ZUXCYN</h1>
+
+<p>
+Kumpulan preset, Pack
+By: Zuxcyn.
+</p>
+
+<a class="btn" href="#packs">
+Lihat Pack
+</a>
+
+<div style="margin-top: 24px;">
+  <a 
+    class="btn" 
+    href="https://amprem.irfanjawa.com/" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style="background: linear-gradient(135deg, #ff416c, #8a2387);"
+  >
+    AM PREM GENE
+  </a>
+  <p style="color: #ccc; font-size: 13px; max-width: 480px; margin: 10px auto 0; line-height: 1.5;">
+    Jika Alight Motion kalian masih versi Play Store atau belum premium, kalian bisa menggunakan <b>AM Prem Generator</b> ini untuk mendapatkan akses Premium 1 tahun secara gratis.
+  </p>
+</div>
+
+</section>
+
+
+<section id="packs">
+
+<h2 class="section-title">
+🔥 Pack Edit
+</h2>
+
+<div class="grid">
+
+<!-- PACK DARI ADMIN / GITHUB -->
+
+<div
+id="dynamicPacks"
+class="grid"
+style="grid-column:1/-1"
+>
+
+<div class="dynamic-status">
+⏳ Memuat pack terbaru...
+</div>
+
+</div>
+
+
+<!-- FULL EDIT -->
+
+<article class="card">
+
+<img
+src="assets/fulledit.jpg"
+alt="Preset Full Edit"
+>
+
+<h3>
+Preset Full Edit
+</h3>
+
+<p>
+Preset full edit
+</p>
+
+<button
+id="fullEditButton"
+class="btn locked"
+disabled
+>
+🔒 LOCKED
+</button>
+
+<p
+id="unlockInfo"
+class="unlock-info"
+>
+Unlock pada 30 Agustus 2026
+</p>
+
+</article>
+
+
+<!-- TRANSITION -->
+
+<article class="card">
+
+<img
+src="assets/Transition.jpg"
+alt="Preset Transition"
+>
+
+<h3>
+Preset Transition
+</h3>
+
+<p>
+preset transition
+</p>
+
+<button
+class="btn download"
+data-url="https://alightcreative.com/am/share/u/ORedvT0kuPbIaRkh2ZQQef2oAju2/p/oSdMFDryih-5038213ac6c8f450"
+>
+Download Preset
+</button>
+
+</article>
+
+
+<!-- CC -->
+
+<article class="card">
+
+<img
+src="assets/CC.jpg"
+alt="CC"
+>
+
+<h3>
+CC
+</h3>
+
+<p>
+Preset CC warna biru🗿
+</p>
+
+<button
+class="btn download"
+data-url="https://alightcreative.com/am/share/u/bvTqSMae0dMR9DI3LI4bP6WeNfo2/p/UP1zGgZKgM-bfcfd6d1344d48d5"
+>
+Download Preset
+</button>
+
+</article>
+
+</div>
+
+</section>
+
+
+<section>
+
+<h2 class="section-title">
+✨ Tentang Pack
+</h2>
+
+<div class="card">
+
+<p>
+Pack by Zuxcyn dibuat sebagai tempat berbagi
+koleksi edit, preset, transition, dan CC.
+Gunakan sesuai kebutuhan editing dan cek kembali
+halaman ini untuk pack baru.
+</p>
+
+</div>
+
+</section>
+
+
+<section id="social">
+
+<h2 class="section-title">
+🌐 Media Sosial
+</h2>
+
+<div class="social">
+
+<a
+href="https://www.tiktok.com/@zuxcynn"
+target="_blank"
+rel="noopener noreferrer"
+>
+TikTok
+</a>
+
+<a
+href="https://www.youtube.com/@sdn_5mb"
+target="_blank"
+rel="noopener noreferrer"
+>
+YouTube
+</a>
+
+<a
+href="https://chat.whatsapp.com/EwCHs2UQ3uc6nk2DOzyVlS"
+target="_blank"
+rel="noopener noreferrer"
+>
+Grup WhatsApp
+</a>
+
+</div>
+
+</section>
+
+
+<section id="support">
+
+<h2 class="section-title">
+💜 Support Piro & Aqilah
+</h2>
+
+<div class="support">
+
+<div class="card person">
+
+<img
+src="assets/Ppgf.jpg"
+alt=""
+>
+
+<div>
+
+<h3>
+Aqilah
+</h3>
+
+<p class="muted">
+@aqilahnadhirah_
+</p>
+
+<a
+class="btn"
+href="https://www.tiktok.com/@aqilahnadhirah_"
+target="_blank"
+rel="noopener noreferrer"
+>
+TikTok
+</a>
+
+</div>
+
+</div>
+
+
+<div class="card person">
+
+<img
+src="assets/Ppsahabat.jpg"
+alt=""
+>
+
+<div>
+
+<h3>
+Anomali
+</h3>
+
+<p class="muted">
+@pirowangyy
+</p>
+
+<a
+class="btn"
+href="https://www.tiktok.com/@pirowangyy"
+target="_blank"
+rel="noopener noreferrer"
+>
+TikTok
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+Made with ❤️ by Zuxcyn
+</footer>
+
+
+<div
+class="loader"
+id="loader"
+aria-hidden="true"
+>
+
+<div class="loaderbox">
+
+<div class="spin"></div>
+
+<b>
+Membuka preset...
+</b>
+
+<p class="muted">
+Tunggu sebentar
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   WORKER API
+   ===================================================== */
+
+const WORKER_URL =
+"https://zuxcyn-pack-api.mandasukaaku.workers.dev";
+
+
+/* =====================================================
+   FULL EDIT
+   ===================================================== */
+
+const FULL_EDIT_URL =
+"https://alightcreative.com/am/share/u/HOOqSCWvegQQAJaKpPpOutWquMu1/p/XlCvUW5ze8-a614ba8f95b94bfe";
+
+
+/* =====================================================
+   LOADER
+   ===================================================== */
+
+const loader =
+document.getElementById("loader");
+
+
+function hideLoader(){
+
+  loader.classList.remove("show");
+
+  loader.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+}
+
+
+function openPreset(url){
+
+  if(!url){
+    return;
+  }
+
+  loader.classList.add("show");
+
+  loader.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  setTimeout(function(){
+
+    window.location.href = url;
+
+  },300);
+
+}
+
+
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    hideLoader();
+
+  }
+);
+
+
+document.addEventListener(
+  "visibilitychange",
+  function(){
+
+    if(
+      document.visibilityState === "visible"
+    ){
+
+      hideLoader();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   TRANSITION + CC
+   ===================================================== */
+
+document
+.querySelectorAll(".download")
+.forEach(function(button){
+
+  button.onclick = function(){
+
+    openPreset(
+      button.dataset.url
+    );
+
+  };
+
+});
+
+
+/* =====================================================
+   FULL EDIT LOCK
+   ===================================================== */
+
+const unlockDate =
+new Date("2026-08-30T00:00:00+07:00");
+
+const fullEditButton =
+document.getElementById("fullEditButton");
+
+const unlockInfo =
+document.getElementById("unlockInfo");
+
+
+function checkFullEdit(){
+
+  const now =
+  new Date();
+
+  if(now >= unlockDate){
+
+    fullEditButton.disabled = false;
+
+    fullEditButton.classList.remove(
+      "locked"
+    );
+
+    fullEditButton.textContent =
+      "Download Preset";
+
+    unlockInfo.textContent =
+      "Preset sudah tersedia.";
+
+    unlockInfo.style.color =
+      "#8cffaa";
+
+    fullEditButton.onclick =
+      function(){
+
+        openPreset(
+          FULL_EDIT_URL
+        );
+
+      };
+
+  }else{
+
+    fullEditButton.disabled = true;
+
+    fullEditButton.classList.add(
+      "locked"
+    );
+
+    fullEditButton.textContent =
+      "🔒 LOCKED";
+
+    unlockInfo.textContent =
+      "Unlock pada 30 Agustus 2026";
+
+    unlockInfo.style.color =
+      "#ff9da8";
+
+    fullEditButton.onclick = null;
+
+  }
+
+}
+
+
+checkFullEdit();
+
+setInterval(
+  checkFullEdit,
+  1000
+);
+
+
+/* =====================================================
+   LOAD PACK DARI WORKER (DILENGKAPI KONTROL LOCK & PESAN)
+   ===================================================== */
+
+async function loadDynamicPacks(){
+
+  const container =
+    document.getElementById(
+      "dynamicPacks"
+    );
+
+  try{
+
+    const response =
+      await fetch(
+        WORKER_URL +
+        "?t=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data;
+
+    try{
+
+      data =
+        JSON.parse(text);
+
+    }catch{
+
+      throw new Error(
+        "Worker tidak mengembalikan JSON."
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        "HTTP " +
+        response.status
+      );
+
+    }
+
+
+    if(
+      data.ok !== true
+    ){
+
+      throw new Error(
+        data.error ||
+        "Gagal mengambil packs."
+      );
+
+    }
+
+
+    const packs =
+      Array.isArray(data.packs)
+      ? data.packs
+      : [];
+
+
+    if(packs.length === 0){
+
+      container.innerHTML = "";
+
+      return;
+
+    }
+
+
+    const newestFirst =
+      [...packs].reverse();
+
+
+    container.innerHTML =
+      "";
+
+
+    newestFirst.forEach(
+      function(pack){
+
+        const card =
+          document.createElement(
+            "article"
+          );
+
+        card.className =
+          "card";
+
+
+        const img =
+          document.createElement(
+            "img"
+          );
+
+        let imageSrc =
+          String(
+            pack.image || ""
+          );
+
+        if(
+          imageSrc &&
+          !imageSrc.startsWith("http") &&
+          !imageSrc.startsWith("assets/")
+        ){
+          imageSrc = "assets/preset/" + imageSrc;
+        }
+
+        img.src =
+          imageSrc;
+
+
+        img.alt =
+          String(
+            pack.name ||
+            "Pack"
+          );
+
+
+        img.onerror =
+          function(){
+
+            this.style.objectFit =
+              "contain";
+
+            this.style.padding =
+              "30px";
+
+            this.alt =
+              "Gambar pack tidak ditemukan";
+
+          };
+
+
+        const title =
+          document.createElement(
+            "h3"
+          );
+
+        title.textContent =
+          String(
+            pack.name ||
+            "Pack tanpa nama"
+          );
+
+
+        const desc =
+          document.createElement(
+            "p"
+          );
+
+        desc.textContent =
+          String(
+            pack.desc ||
+            "Pack by Zuxcyn."
+          );
+
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.className =
+          "btn";
+
+
+        const isLocked =
+          Boolean(
+            pack.isLocked
+          );
+
+        const lockMsg =
+          String(
+            pack.lockMessage ||
+            "maaf sementara aku lock dulu preset ini"
+          );
+
+
+        if(isLocked){
+
+          button.disabled =
+            true;
+
+          button.classList.add(
+            "locked"
+          );
+
+          button.textContent =
+            "🔒 LOCKED";
+
+
+          const info =
+            document.createElement(
+              "p"
+            );
+
+          info.className =
+            "unlock-info";
+
+          info.textContent =
+            lockMsg;
+
+
+          card.appendChild(img);
+
+          card.appendChild(title);
+
+          card.appendChild(desc);
+
+          card.appendChild(button);
+
+          card.appendChild(info);
+
+        }else{
+
+          button.textContent =
+            "Download Preset";
+
+          button.onclick =
+            function(){
+
+              openPreset(
+                String(
+                  pack.url || ""
+                )
+              );
+
+            };
+
+          if(!pack.url){
+
+            button.disabled =
+              true;
+
+            button.textContent =
+              "Link Tidak Tersedia";
+
+          }
+
+          card.appendChild(img);
+
+          card.appendChild(title);
+
+          card.appendChild(desc);
+
+          card.appendChild(button);
+
+        }
+
+
+        container.appendChild(
+          card
+        );
+
+      }
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Gagal memuat pack:",
+      error
+    );
+
+
+    container.innerHTML = `
+      <div class="dynamic-error">
+        ❌ Pack terbaru gagal dimuat.<br><br>
+        Worker: ${WORKER_URL}<br>
+        Error: ${escapeHtml(error.message)}
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+   ===================================================== */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+loadDynamicPacks();
+
+
+setInterval(
+  loadDynamicPacks,
+  15000
+);
+
+</script>
+
+
+<!-- =====================================================
+     ZUXCYN PREMIUM ADDITIONS
+     Added without modifying the original Pack system.
+     ===================================================== -->
+<style id="zuxcyn-premium-additions">
+#zxIntro{position:fixed;inset:0;z-index:9999;background:#050507;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .8s ease,visibility .8s ease}
+#zxIntro.zx-hide{opacity:0;visibility:hidden;pointer-events:none}
+#zxIntro:before{content:"";position:absolute;width:70vmax;height:70vmax;border-radius:50%;background:radial-gradient(circle,#7b4dff22 0,#a72cff0b 35%,transparent 70%);filter:blur(8px);animation:zxPulse 3s ease-in-out infinite}
+.zx-noise{position:absolute;inset:0;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.zx-intro-box{position:relative;width:min(520px,88vw);text-align:center;padding:35px 20px}
+.zx-avatar{width:76px;height:76px;border-radius:24px;object-fit:cover;border:1px solid #ffffff25;box-shadow:0 0 45px #8a5cff55;animation:zxFloat 2.5s ease-in-out infinite}
+.zx-brand{margin:24px 0 5px;font-size:clamp(30px,8vw,58px);font-weight:900;letter-spacing:.08em;background:linear-gradient(90deg,#fff,#bba8ff,#fff);background-size:200%;-webkit-background-clip:text;color:transparent;animation:zxShine 2s linear infinite}
+.zx-sub{color:#aaa;letter-spacing:.22em;text-transform:uppercase;font-size:11px}
+.zx-progress{height:2px;background:#ffffff12;border-radius:20px;margin:30px auto 12px;overflow:hidden;max-width:360px}
+.zx-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#6d5cff,#c35cff,#fff);box-shadow:0 0 20px #9d65ff;animation:zxLoad 4s linear forwards}
+.zx-percent{font-size:12px;color:#777;letter-spacing:.15em}
+@keyframes zxLoad{to{width:100%}} @keyframes zxPulse{50%{transform:scale(1.12);opacity:.65}} @keyframes zxFloat{50%{transform:translateY(-7px)}} @keyframes zxShine{to{background-position:200% center}}
+
+.zx-pages{max-width:1100px;margin:0 auto;padding:20px 20px 70px}
+.zx-page{margin:42px 0;scroll-margin-top:90px;animation:zxReveal .8s both}
+.zx-page-title{font-size:30px;margin:0 0 7px;font-weight:900}
+.zx-page-desc{color:#999;margin:0 0 20px}
+.zx-about{display:grid;grid-template-columns:170px 1fr;gap:26px;align-items:center}
+.zx-about-avatar{width:170px;height:170px;border-radius:38px;object-fit:cover;border:1px solid #ffffff18;box-shadow:0 20px 70px #000,0 0 45px #7957ff33}
+.zx-chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.zx-chip{padding:8px 12px;border-radius:999px;background:#ffffff0b;border:1px solid #ffffff12;color:#ccc;font-size:12px}
+.zx-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.zx-tool{position:relative;padding:22px;border-radius:24px;background:linear-gradient(145deg,#17151eaa,#0f1015cc);border:1px solid #ffffff12;backdrop-filter:blur(15px);overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
+.zx-tool:before{content:"";position:absolute;inset:-1px;background:linear-gradient(120deg,transparent,#9a63ff22,transparent);transform:translateX(-100%);transition:.6s}.zx-tool:hover{transform:translateY(-6px);border-color:#a276ff44;box-shadow:0 20px 60px #0008}.zx-tool:hover:before{transform:translateX(100%)}
+.zx-icon{font-size:28px}.zx-tool h3{margin:12px 0 7px}.zx-tool p{color:#999;font-size:13px;line-height:1.6;margin:0 0 16px}
+.zx-buy{display:inline-flex;width:100%;justify-content:center;align-items:center;padding:12px 15px;border-radius:13px;text-decoration:none;color:#fff;font-weight:800;background:linear-gradient(135deg,#6d5cff,#b52cff);box-shadow:0 10px 30px #6d5cff22;position:relative;z-index:1}
+.zx-buy:hover{filter:brightness(1.13)}
+.zx-soon{opacity:.72}.zx-soon .zx-buy{background:#ffffff0d;box-shadow:none;color:#aaa}
+@keyframes zxReveal{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+@media(max-width:650px){.zx-about{grid-template-columns:1fr;text-align:center}.zx-about-avatar{margin:auto}.zx-chiprow{justify-content:center}.zx-pages{padding-left:14px;padding-right:14px}}
+</style>
+
+<div id="zxIntro" aria-label="Zuxcyn Portofolio loading">
+  <div class="zx-noise"></div>
+  <div class="zx-intro-box">
+    <img class="zx-avatar" src="https://cdn.phototourl.com/member/2026-09-26-7e2c8568-558f-4e5d-8f89-f31cc7465c5f.png" alt="Zuxcyn">
+    <div class="zx-brand">ZUXCYN</div>
+    <div class="zx-sub">Portofolio · Creator · Programmer · Editor</div>
+    <div class="zx-progress"><i></i></div>
+    <div class="zx-percent" id="zxPercent">0%</div>
+  </div>
+</div>
+
+<section class="zx-pages" id="zuxcyn-pages">
+  <section class="zx-page" id="about-zuxcyn">
+    <h2 class="zx-page-title">About Zuxcyn</h2>
+    <p class="zx-page-desc">Behind the packs, edits, and projects.</p>
+    <div class="card zx-about">
+      <img class="zx-about-avatar" src="https://cdn.phototourl.com/member/2026-09-26-7e2c8568-558f-4e5d-8f89-f31cc7465c5f.png" alt="Zuxcyn / Radhiya">
+      <div>
+        <div class="muted">Nama asli</div>
+        <h2 style="margin:5px 0 10px">Zuxcyn <span style="font-weight:400;color:#777">/ Radhiya</span></h2>
+        <p class="muted" style="line-height:1.8">Seorang programmer sekaligus editor yang fokus pada Ultra Motion dan Node Video. Menggabungkan programming dan kreativitas editing untuk membuat berbagai project, preset, serta karya visual.</p>
+        <div class="zx-chiprow"><span class="zx-chip">Programmer</span><span class="zx-chip">Ultra Motion</span><span class="zx-chip">Node Video</span><span class="zx-chip">Creator</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="zx-page" id="marketplace-zuxcyn">
+    <h2 class="zx-page-title">Marketplace</h2>
+    <p class="zx-page-desc">Layanan dan produk yang tersedia.</p>
+    <div class="zx-tools">
+      <article class="zx-tool"><div class="zx-icon">✨</div><h3>AM Prem 1thn</h3><p>Minat dengan AM Prem 1 tahun? Hubungi penjual melalui WhatsApp untuk mendapatkan daftar harga dan informasi pembelian.</p><a class="zx-buy" href="https://wa.me/6283161621493?text=Halo%20kak%2C%20saya%20tertarik%20dengan%20AM%20Prem%201thn.%20Boleh%20minta%20list%20harga%20dan%20informasi%20cara%20pembeliannya%3F" target="_blank" rel="noopener noreferrer">🟢 Minat? PC</a></article>
+      <article class="zx-tool"><div class="zx-icon">🖥️</div><h3>Panel Pterodactyl</h3><p>Kalau kalian minat atau tertarik sama bot WhatsApp, biar lebih gampang bikinnya pakai Panel Pterodactyl, nggak? Kalau minat, langsung PC aja.</p><a class="zx-buy" href="https://wa.me/6283848223299?text=Halo%20kak%2C%20saya%20tertarik%20dengan%20Panel%20Pterodactyl%20untuk%20bot%20WhatsApp.%20Boleh%20minta%20informasi%20panel%2C%20harga%2C%20dan%20cara%20pembeliannya%3F" target="_blank" rel="noopener noreferrer">🟢 Minat? PC</a></article>
+    </div>
+  </section>
+
+  <section class="zx-page" id="creator-tools-zuxcyn"><h2 class="zx-page-title">Creator Tools</h2><p class="zx-page-desc">Tools creator akan ditambahkan di sini.</p><div class="zx-tools"><article class="zx-tool zx-soon"><div class="zx-icon">✦</div><h3>Coming Soon</h3><p>Creator tools premium sedang dipersiapkan.</p><span class="zx-buy">Segera Hadir</span></article></div></section>
+  <section class="zx-page" id="editing-tools-zuxcyn"><h2 class="zx-page-title">Editing Tools</h2><p class="zx-page-desc">Tools editing akan ditambahkan di sini.</p><div class="zx-tools"><article class="zx-tool zx-soon"><div class="zx-icon">🎬</div><h3>Coming Soon</h3><p>Editing tools sedang dipersiapkan.</p><span class="zx-buy">Segera Hadir</span></article></div></section>
+  <section class="zx-page" id="developer-tools-zuxcyn"><h2 class="zx-page-title">Developer Tools</h2><p class="zx-page-desc">Tools programming akan ditambahkan di sini.</p><div class="zx-tools"><article class="zx-tool zx-soon"><div class="zx-icon">⌘</div><h3>Coming Soon</h3><p>Developer tools sedang dipersiapkan.</p><span class="zx-buy">Segera Hadir</span></article></div></section>
+  <section class="zx-page" id="utility-tools-zuxcyn"><h2 class="zx-page-title">Utilities</h2><p class="zx-page-desc">Utility tools akan ditambahkan di sini.</p><div class="zx-tools"><article class="zx-tool zx-soon"><div class="zx-icon">⚡</div><h3>Coming Soon</h3><p>Utility tools sedang dipersiapkan.</p><span class="zx-buy">Segera Hadir</span></article></div></section>
+</section>
+
+<script id="zuxcyn-premium-script">
+(function(){
+  const intro=document.getElementById('zxIntro');
+  const percent=document.getElementById('zxPercent');
+  if(!intro)return;
+  const start=performance.now(), duration=4000;
+  function tick(now){
+    const p=Math.min(100,Math.floor(((now-start)/duration)*100));
+    if(percent)percent.textContent=p+'%';
+    if(p<100)requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  setTimeout(function(){
+    if(percent)percent.textContent='100%';
+    intro.classList.add('zx-hide');
+    setTimeout(function(){intro.remove()},900);
+  },4000);
+})();
+</script>
+
+</body>
+</html>
